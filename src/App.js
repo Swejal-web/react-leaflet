@@ -1,38 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
-import { Icon } from 'leaflet';
-import * as parkData from './data/skateboard-parks.json';
+
 import * as schools from './data/export.json';
 import './App.css';
-
-export const icon = new Icon({
-  iconUrl: '/skateboarding.svg',
-  iconSize: [25, 25],
-});
 
 export default function App() {
   const [activePark, setActivePark] = React.useState(null);
 
   console.log(schools);
 
-  let Polygon = schools.features.filter(
-    (school) => school.geometry.type === 'Polygon'
-  );
+  // let Polygon = schools.features.filter(
+  //   (school) => school.geometry.type === 'Polygon' && school.properties.name
+  // );
   let Point = schools.features.filter(
-    (school) => school.geometry.type === 'Point'
+    (school) => school.geometry.type === 'Point' && school.properties.name
   );
-
-  //let array = schools.elements.filter((school) => school.type === 'node');
-
-  // for (let i in schools.elements) {
-  //   if (schools.elements[i].type === 'node') {
-  //     var shreya = schools.elements[i];
-  //     var swejal = array.push(shreya);
-  //   }
-  // }
-
-  //console.log(swejal);
 
   return (
     <div className='wrapper'>
@@ -48,7 +31,7 @@ export default function App() {
         </div>
       </div>
       <div className='container'>
-        <Map center={[27.7201758, 85.3017867]} zoom={10}>
+        <Map center={[27.7120406, 85.2878096]} zoom={16}>
           <TileLayer
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -62,27 +45,27 @@ export default function App() {
                 point.geometry.coordinates[0],
               ]}
               onClick={() => {
-                console.log('hy');
+                setActivePark(point);
               }}
-              icon={icon}
             />
           ))}
-          {/* {activePark && (
-        <Popup
-          position={[
-            activePark.geometry.coordinates[1],
-            activePark.geometry.coordinates[0],
-          ]}
-          onClose={() => {
-            setActivePark(null);
-          }}
-        >
-          <div>
-            <h2>{activePark.properties.NAME}</h2>
-            <p>{activePark.properties.DESCRIPTIO}</p>
-          </div>
-        </Popup>
-      )} */}
+          {activePark && (
+            <Popup
+              position={[
+                activePark.geometry.coordinates[1],
+                activePark.geometry.coordinates[0],
+              ]}
+              onClose={() => {
+                setActivePark(null);
+              }}
+            >
+              <div>
+                <h2>Name: {activePark.properties.name}</h2>
+
+                <p>Operator: {activePark.properties.operator}</p>
+              </div>
+            </Popup>
+          )}
         </Map>
       </div>
     </div>
