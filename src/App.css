@@ -1,4 +1,67 @@
-.leaflet-container {
-  width: 100%;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Source Code Pro', monospace;
+}
+.dashboard {
+  float: left;
   height: 100vh;
+  width: 25%;
+  background-color: #132163;
+}
+.container {
+  height: 600px;
+  width: 100%;
+  z-index: 1;
+}
+.leaflet-container {
+  height: 100%;
+  width: 70%;
+  border-radius: 10px;
+  top: 10%;
+}
+
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  background-color: #132163;
+}
+
+.fa-search {
+  width: 10%;
+  height: 100%;
+  color: #01062f;
+  float: right;
+  margin: 5px;
+}
+.search {
+  background-color: #ffff;
+  width: 80%;
+  height: 2em;
+  margin: auto;
+  border-radius: 10px;
+  padding-top: 1%;
+  margin-top: 17%;
+}
+input {
+  height: 90%;
+  width: 80%;
+  border: none;
+  margin-left: 5%;
+}
+input:focus-visible {
+  outline: none;
+}
+.content {
+  color: #c5d53e;
+  margin-left: 100px;
+  margin-top: 50px;
+}
+li {
+  list-style: none;
+  font-size: larger;
+  padding: 4%;
 }
